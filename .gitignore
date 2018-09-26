@@ -1,0 +1,6 @@
+# exclude /node_modules /.gitignore /config/config.json
+/node_modules/
+/tmp/
+/tests/
+helpers/config.desa.json
+public/imagenes/*
