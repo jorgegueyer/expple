@@ -1,0 +1,8 @@
+{
+	"database": {
+		"instance": "mongodb://localserver:27017/expple",
+		"name":"mongodb",
+		"user":"admin",
+		"pass":"expple123"
+	}
+}

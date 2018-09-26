@@ -1,7 +1,31 @@
 var mongoose = require("mongoose"),
-	Schema = mongoose.Schema;
+	Schema = mongoose.Schema,
+	fs = require("fs");
 
-mongoose.connect("mongodb://localhost/expple"); //Nombre_del_servidor/nombre_bd
+mongoose.Promise = global.Promise;
+
+var infoDataBase = fs.readFileSync("./helpers/config.desa.json","utf8", 
+		function(error,data) {
+			if (error) return null;
+			else {
+				var json = JSON.parse(data);
+				var database = json["database"];
+				if (database.name == "mongodb")
+					return {
+						instance: (database.instance != null && database.instance != undefined) ? database.instance : null,
+						user : (database.user != null && database.user != undefined) ? database.user : null,
+						pass : (database.pass != null && database.pass != undefined) ? database.pass : null
+					}
+				return null;
+			}
+});
+
+if (infoDataBase != null) 
+	mongoose.connect("mongodb://localserver:27017/expple",{user: infoDataBase.user, pass:infoDataBase.pass});
+	else return;
+
+//mongoose.connect("mongodb://localhost/expple"); //Nombre_del_servidor/nombre_bd
+//mongoose.connect("mongodb://localserver:27017/expple");
 
 /* 	Types mongodb
 	String
